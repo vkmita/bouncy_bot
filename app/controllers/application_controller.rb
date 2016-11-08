@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
       request.url('/v2.6/me/messages')
       request.params['access_token'] = PAGE_TOKEN
       request.headers['Content-Type'] = 'application/json'
-      req.body = {
+      request.body = {
         recipient:{
           id: recipient_id,
         },
