@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
     puts challenge
 
     if mode == 'subscribe' && verify_token == '417327'
-      render json: { challenge: challenge }
+      render json: 'challenge'
     else
       head 401
     end
