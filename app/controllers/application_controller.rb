@@ -2,8 +2,8 @@ class ApplicationController < ActionController::API
   PAGE_TOKEN = 'EAASZBQhnIYvQBAFcIn7pbyLxsam6absGnOAA0UZAReTA7bgppLyRVAZAStaOssxGUlqSpEV48bwhj7MDvOrZAAZCqhhP9epbxWdhMktLmMm9u0qoiAPVx5ON1WH7gIJxR5G4blpWVdKEGqCZBACaayyZAqtdCEkelzMSrCnRVw4rwZDZD'
 
   def message
-    text = params.dig(:entry, :messaging, :message, :text)
-    recipient_id = params.dig(:entry, :messaging, :recipient, :id)
+    text = params[:entry]&.[:messaging]&.[:message][:text]
+    recipient_id = params[:entry][:messaging][:recipient][:id]
 
     connection = Faraday.new(
       url: 'https://graph.facebook.com/',
