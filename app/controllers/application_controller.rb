@@ -4,9 +4,9 @@ class ApplicationController < ActionController::API
   end
 
   def verify
-    mode = params[:hub][:mode]
-    verify_token = params[:hub][:verify_token]
-    challenge = params[:hub][:challenge]
+    mode = params['hub.mode']
+    verify_token = params['hub.verify_token']
+    challenge = params['hub.challenge']
 
     puts mode
     puts verify_token
