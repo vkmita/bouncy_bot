@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  get '/', to: 'application#index'
+  post '/', to: 'application#message'
+  get '/', to: 'application#verify'
 end

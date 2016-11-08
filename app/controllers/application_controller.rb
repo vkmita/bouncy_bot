@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::API
-  def index
+  def message
     'Hello world'
+  end
+
+  def verify
   end
 end
