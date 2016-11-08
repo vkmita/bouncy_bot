@@ -13,12 +13,12 @@ class ApplicationController < ActionController::API
       request.params['access_token'] = PAGE_TOKEN
       request.headers['Content-Type'] = 'application/json'
       request.body = {
-        recipient:{
+        recipient: {
           id: recipient_id,
         },
         message: {
           text: text,
-        }
+        }.to_json
       }
     end
 
