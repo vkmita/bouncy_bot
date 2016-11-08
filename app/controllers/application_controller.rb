@@ -18,8 +18,8 @@ class ApplicationController < ActionController::API
         },
         message: {
           text: text,
-        }.to_json
-      }
+        }
+      }.to_json
     end
 
     head 200
