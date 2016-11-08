@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   def message
     text = params[:entry].try(:[], :messaging).try(:[], :message).try(:[], :text)
-    recipient_id = params[:entry].try(:[], :messaging).try(:[], :recipient).try(:[], :id)
+    recipient_id = params[:entry].try(:first).try(:[], :messaging).try(:[], :recipient).try(:[], :id)
 
     connection = Faraday.new(
       url: 'https://graph.facebook.com/',
