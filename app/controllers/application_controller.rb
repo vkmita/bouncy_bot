@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::API
   PAGE_TOKEN = 'EAASZBQhnIYvQBAFcIn7pbyLxsam6absGnOAA0UZAReTA7bgppLyRVAZAStaOssxGUlqSpEV48bwhj7MDvOrZAAZCqhhP9epbxWdhMktLmMm9u0qoiAPVx5ON1WH7gIJxR5G4blpWVdKEGqCZBACaayyZAqtdCEkelzMSrCnRVw4rwZDZD'
 
+
+  RESPONSES_HASH = {
+    'What is the meaning of the universe?' => '42',
+    'toilet paper' => 'In the upstairs storage closet.',
+    'bills' => 'Ask Victor'
+  }
+
+
+
+
   def message
     text = params[:entry].first.try(:[], :messaging).first.try(:[], :message).try(:[], :text)
     recipient_id = params[:entry].try(:first).try(:[], :messaging).first.try(:[], :sender).try(:[], :id)
@@ -17,7 +27,7 @@ class ApplicationController < ActionController::API
           id: recipient_id,
         },
         message: {
-          text: text,
+          text: RESPONSES_HASH[text] || text,
         }
       }.to_json
     end
