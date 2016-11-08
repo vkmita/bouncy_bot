@@ -1,7 +1,80 @@
 class ApplicationController < ActionController::API
+  PAGE_TOKEN = 'EAASZBQhnIYvQBAFcIn7pbyLxsam6absGnOAA0UZAReTA7bgppLyRVAZAStaOssxGUlqSpEV48bwhj7MDvOrZAAZCqhhP9epbxWdhMktLmMm9u0qoiAPVx5ON1WH7gIJxR5G4blpWVdKEGqCZBACaayyZAqtdCEkelzMSrCnRVw4rwZDZD'
+
   def message
-    'Hello world'
+    text = params.dig(:entry, :messaging, :message, :text)
+    recipient_id = params.dig(:entry, :messaging, :recipient, :id)
+
+    connection = Faraday.new(
+      url: 'https://graph.facebook.com/',
+    )
+    connection.post do |request|
+      request.url('/v2.6/me/messages')
+      request.params['access_token'] = PAGE_TOKEN
+      request.headers['Content-Type'] = 'application/json'
+      req.body = {
+        recipient:{
+          id: recipient_id,
+        },
+        message: {
+          text: text,
+        }
+      }
+    end
+
+    head 200
   end
+
+  # {
+  #   "object"=>"page",
+  #   "entry"=> [
+  #     {
+  #       "id"=>"1323532757671429",
+  #       "time"=>1478582556893,
+  #       "messaging"=>[
+  #         {
+  #           "sender"=>{
+  #             "id"=>"1141243189291202"
+  #           },
+  #           "recipient"=>{
+  #             "id"=>"1323532757671429"
+  #           },
+  #           "timestamp"=>1478582556765,
+  #           "message"=>{
+  #             "mid"=>"mid.1478582556765:0038074b75",
+  #             "seq"=>7,
+  #             "text"=>"hi"
+  #           }
+  #         }
+  #       ]
+  #     }
+  #   ],
+  #   "application"=>{
+  #     "object"=>"page",
+  #     "entry"=>[
+  #       {
+  #         "id"=>"1323532757671429",
+  #         "time"=>1478582556893,
+  #         "messaging"=>[
+  #           {
+  #             "sender"=>{
+  #               "id"=>"1141243189291202"
+  #             },
+  #             "recipient"=>{
+  #               "id"=>"1323532757671429"
+  #             },
+  #             "timestamp"=>1478582556765,
+  #             "message"=>{
+  #               "mid"=>"mid.1478582556765:0038074b75",
+  #               "seq"=>7,
+  #               "text"=>"hi"
+  #             }
+  #           }
+  #         ]
+  #       }
+  #     ]
+  #   }
+  # }
 
   def verify
     mode = params['hub.mode']
