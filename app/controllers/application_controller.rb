@@ -8,40 +8,40 @@ class ApplicationController < ActionController::API
     'bills' => 'Ask Victor'
   }
 
-  {
-    "token" => "BOkRhXHS0tcxjeZEfsOHMEnU",
-    "team_id" => "T2JTK19R7",
-    "api_app_id" => "A4T7LAP6Y",
-    "event"=> {
-      "type"=>"message",
-      "user"=>"U2K5X8VMH",
-      "text"=>"bills",
-      "ts"=>"1491099306.357268",
-      "channel"=>"C4AGYTZFA",
-      "event_ts"=>"1491099306.357268"
-    },
-    "type"=>"event_callback",
-    "authed_users"=>["U2K5X8VMH"],
-    "event_id"=>"Ev4TSW834P",
-    "event_time"=>1491099306,
-    "application"=>{
-      "token"=>"BOkRhXHS0tcxjeZEfsOHMEnU",
-      "team_id"=>"T2JTK19R7",
-      "api_app_id"=>"A4T7LAP6Y",
-      "event"=>{
-        "type"=>"message",
-        "user"=>"U2K5X8VMH",
-        "text"=>"bills",
-        "ts"=>"1491099306.357268",
-        "channel"=>"C4AGYTZFA",
-        "event_ts"=>"1491099306.357268"
-      },
-      "type"=>"event_callback",
-      "authed_users"=>["U2K5X8VMH"],
-      "event_id"=>"Ev4TSW834P",
-      "event_time"=>1491099306
-    }
-  }
+  # {
+  #   "token" => "BOkRhXHS0tcxjeZEfsOHMEnU",
+  #   "team_id" => "T2JTK19R7",
+  #   "api_app_id" => "A4T7LAP6Y",
+  #   "event"=> {
+  #     "type"=>"message",
+  #     "user"=>"U2K5X8VMH",
+  #     "text"=>"bills",
+  #     "ts"=>"1491099306.357268",
+  #     "channel"=>"C4AGYTZFA",
+  #     "event_ts"=>"1491099306.357268"
+  #   },
+  #   "type"=>"event_callback",
+  #   "authed_users"=>["U2K5X8VMH"],
+  #   "event_id"=>"Ev4TSW834P",
+  #   "event_time"=>1491099306,
+  #   "application"=>{
+  #     "token"=>"BOkRhXHS0tcxjeZEfsOHMEnU",
+  #     "team_id"=>"T2JTK19R7",
+  #     "api_app_id"=>"A4T7LAP6Y",
+  #     "event"=>{
+  #       "type"=>"message",
+  #       "user"=>"U2K5X8VMH",
+  #       "text"=>"bills",
+  #       "ts"=>"1491099306.357268",
+  #       "channel"=>"C4AGYTZFA",
+  #       "event_ts"=>"1491099306.357268"
+  #     },
+  #     "type"=>"event_callback",
+  #     "authed_users"=>["U2K5X8VMH"],
+  #     "event_id"=>"Ev4TSW834P",
+  #     "event_time"=>1491099306
+  #   }
+  # }
 
   def message
     return head 200 if params[:event][:subtype] == 'subtype'
@@ -52,7 +52,7 @@ class ApplicationController < ActionController::API
       url: 'https://hooks.slack.com',
     )
     connection.post do |request|
-      request.url('/services/T2JTK19R7/B4TSGTH8W/z0NQdC8GcksawhYikXVdwJe3')
+      request.url('/services/T2JTK19R7/B4T7QKH52/2ZmMXsKBLHtuU7yZCgU3MCIQ')
       request.headers['Content-Type'] = 'application/json'
       request.body = { text: response }.to_json
     end
