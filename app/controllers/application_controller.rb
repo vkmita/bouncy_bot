@@ -87,7 +87,6 @@ class ApplicationController < ActionController::API
     verify_token = params['token']
     challenge = params['challenge']
 
-    puts mode
     puts verify_token
     puts challenge
 
