@@ -1,24 +1,7 @@
-# README
+# Bouncy Home's Slack Channel Bot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Currently it just hates on Nikhil, but it can be anything we want it to be. 
 
-Things you may want to cover:
+Feature requests encouraged
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Deploys: Ask Victor to deploy to Heroku
