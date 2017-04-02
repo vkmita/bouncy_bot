@@ -84,18 +84,13 @@ class ApplicationController < ActionController::API
   # }
 
   def verify
-    mode = params['hub.mode']
-    verify_token = params['hub.verify_token']
-    challenge = params['hub.challenge']
+    verify_token = params['token']
+    challenge = params['challenge']
 
     puts mode
     puts verify_token
     puts challenge
 
-    if mode == 'subscribe' && verify_token == '417327'
-      render json: challenge
-    else
-      head 401
-    end
+    render json: challenge
   end
 end
