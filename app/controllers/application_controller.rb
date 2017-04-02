@@ -8,25 +8,51 @@ class ApplicationController < ActionController::API
     'bills' => 'Ask Victor'
   }
 
+  {
+    "token" => "BOkRhXHS0tcxjeZEfsOHMEnU",
+    "team_id" => "T2JTK19R7",
+    "api_app_id" => "A4T7LAP6Y",
+    "event"=> {
+      "type"=>"message",
+      "user"=>"U2K5X8VMH",
+      "text"=>"bills",
+      "ts"=>"1491099306.357268",
+      "channel"=>"C4AGYTZFA",
+      "event_ts"=>"1491099306.357268"
+    },
+    "type"=>"event_callback",
+    "authed_users"=>["U2K5X8VMH"],
+    "event_id"=>"Ev4TSW834P",
+    "event_time"=>1491099306,
+    "application"=>{
+      "token"=>"BOkRhXHS0tcxjeZEfsOHMEnU",
+      "team_id"=>"T2JTK19R7",
+      "api_app_id"=>"A4T7LAP6Y",
+      "event"=>{
+        "type"=>"message",
+        "user"=>"U2K5X8VMH",
+        "text"=>"bills",
+        "ts"=>"1491099306.357268",
+        "channel"=>"C4AGYTZFA",
+        "event_ts"=>"1491099306.357268"
+      },
+      "type"=>"event_callback",
+      "authed_users"=>["U2K5X8VMH"],
+      "event_id"=>"Ev4TSW834P",
+      "event_time"=>1491099306
+    }
+  }
+
   def message
     text = params[:entry].first.try(:[], :messaging).first.try(:[], :message).try(:[], :text)
-    recipient_id = params[:entry].try(:first).try(:[], :messaging).first.try(:[], :sender).try(:[], :id)
 
     connection = Faraday.new(
-      url: 'https://graph.facebook.com/',
+      url: 'https://hooks.slack.com',
     )
     connection.post do |request|
-      request.url('/v2.6/me/messages')
-      request.params['access_token'] = PAGE_TOKEN
+      request.url('/services/T2JTK19R7/B4TSGTH8W/z0NQdC8GcksawhYikXVdwJe3')
       request.headers['Content-Type'] = 'application/json'
-      request.body = {
-        recipient: {
-          id: recipient_id,
-        },
-        message: {
-          text: RESPONSES_HASH[text] || text,
-        }
-      }.to_json
+      request.body = { text: RESPONSES_HASH[text] || text }.to_json
     end
 
     head 200
