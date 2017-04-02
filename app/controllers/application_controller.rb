@@ -44,7 +44,7 @@ class ApplicationController < ActionController::API
   }
 
   def message
-    text = params[:entry].first.try(:[], :messaging).first.try(:[], :message).try(:[], :text)
+    text = params[:event].try(:[], :text)
 
     connection = Faraday.new(
       url: 'https://hooks.slack.com',
