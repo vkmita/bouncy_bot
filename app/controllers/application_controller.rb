@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
 
 
   RESPONSES_HASH = {
+    'Is Nikhil stupid?' => 'Yes he is',
     'What is the meaning of the universe?' => '42',
     'toilet paper' => 'In the upstairs storage closet.',
     'bills' => 'Ask Victor'
