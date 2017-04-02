@@ -44,16 +44,18 @@ class ApplicationController < ActionController::API
   }
 
   def message
+    return head 200 if params[:event][:subtype] == 'subtype'
     text = params[:event].try(:[], :text)
+    return head 200 unless response = RESPONSES_HASH[text]
 
-    # connection = Faraday.new(
-    #   url: 'https://hooks.slack.com',
-    # )
-    # connection.post do |request|
-    #   request.url('/services/T2JTK19R7/B4TSGTH8W/z0NQdC8GcksawhYikXVdwJe3')
-    #   request.headers['Content-Type'] = 'application/json'
-    #   request.body = { text: RESPONSES_HASH[text] || text }.to_json
-    # end
+    connection = Faraday.new(
+      url: 'https://hooks.slack.com',
+    )
+    connection.post do |request|
+      request.url('/services/T2JTK19R7/B4TSGTH8W/z0NQdC8GcksawhYikXVdwJe3')
+      request.headers['Content-Type'] = 'application/json'
+      request.body = { text: response }.to_json
+    end
 
     head 200
   end
