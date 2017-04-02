@@ -46,20 +46,20 @@ class ApplicationController < ActionController::API
   # }
 
   def message
-    return head 200 if params[:event][:subtype] == 'subtype'
-
-    if params[:event][:user] == 'U2KDGT9V2'
-      connection = Faraday.new(
-        url: 'https://hooks.slack.com',
-      )
-      connection.post do |request|
-        request.url('/services/T2JTK19R7/B4T7QKH52/2ZmMXsKBLHtuU7yZCgU3MCIQ')
-        request.headers['Content-Type'] = 'application/json'
-        request.body = { text: 'Nope' }.to_json
-      end
-
-      return head 200
-    end
+    return head 200 if params[:event][:subtype] == 'bot_message'
+    # This is nikhils rule
+    # if params[:event][:user] == 'U2KDGT9V2'
+    #   connection = Faraday.new(
+    #     url: 'https://hooks.slack.com',
+    #   )
+    #   connection.post do |request|
+    #     request.url('/services/T2JTK19R7/B4T7QKH52/2ZmMXsKBLHtuU7yZCgU3MCIQ')
+    #     request.headers['Content-Type'] = 'application/json'
+    #     request.body = { text: 'Nope' }.to_json
+    #   end
+    #
+    #   return head 200
+    # end
 
     text = params[:event].try(:[], :text)
     return head 200 unless response = RESPONSES_HASH[text.downcase]
