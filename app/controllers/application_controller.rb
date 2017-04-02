@@ -8,9 +8,6 @@ class ApplicationController < ActionController::API
     'bills' => 'Ask Victor'
   }
 
-
-
-
   def message
     text = params[:entry].first.try(:[], :messaging).first.try(:[], :message).try(:[], :text)
     recipient_id = params[:entry].try(:first).try(:[], :messaging).first.try(:[], :sender).try(:[], :id)
