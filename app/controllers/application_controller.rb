@@ -3,10 +3,11 @@ class ApplicationController < ActionController::API
 
 
   RESPONSES_HASH = {
-    'Is Nikhil stupid?' => 'Yes he is',
-    'What is the meaning of the universe?' => '42',
+    'is nikhil stupid?' => 'Yes he is',
+    'what is the meaning of the universe?' => '42',
     'toilet paper' => 'In the upstairs storage closet.',
-    'bills' => 'Ask Victor'
+    'bills' => 'Ask Victor',
+    'fuck you' => 'No fuck you!'
   }
 
   # {
@@ -46,8 +47,22 @@ class ApplicationController < ActionController::API
 
   def message
     return head 200 if params[:event][:subtype] == 'subtype'
+
+    if params[:event][:user] == 'U2KDGT9V2'
+      connection = Faraday.new(
+        url: 'https://hooks.slack.com',
+      )
+      connection.post do |request|
+        request.url('/services/T2JTK19R7/B4T7QKH52/2ZmMXsKBLHtuU7yZCgU3MCIQ')
+        request.headers['Content-Type'] = 'application/json'
+        request.body = { text: 'Nope' }.to_json
+      end
+
+      return head 200
+    end
+
     text = params[:event].try(:[], :text)
-    return head 200 unless response = RESPONSES_HASH[text]
+    return head 200 unless response = RESPONSES_HASH[text.downcase]
 
     connection = Faraday.new(
       url: 'https://hooks.slack.com',
