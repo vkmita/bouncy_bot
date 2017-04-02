@@ -90,6 +90,6 @@ class ApplicationController < ActionController::API
     puts verify_token
     puts challenge
 
-    render json: challenge
+    render json: { challenge: challenge }
   end
 end
